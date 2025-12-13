@@ -1,0 +1,232 @@
+/* ✅ Vite 기본 템플릿(#root max-width/padding) 완전 해제 */
+:global(#root) {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: initial !important;
+  width: 100%;
+}
+
+:global(html),
+:global(body) {
+  margin: 0;
+  padding: 0;
+}
+
+/* ✅ "1280 고정"을 위해: 브라우저가 더 좁으면 가로 스크롤 */
+:global(body) {
+  overflow-x: auto;
+}
+
+:global(*) {
+  box-sizing: border-box;
+}
+
+.page {
+  width: 100%;
+  min-height: 1200px; /* ✅ 1200 유지 */
+  background: #ffffff;
+}
+
+/* HEADER (풀폭) */
+.header {
+  width: 100%;
+  height: 64px;
+  background: #2f7cf6;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-weight: 800;
+}
+
+/* ✅ 1280 고정 프레임 (절대 줄어들지 않음) */
+.frame {
+  width: 1280px;
+  min-height: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* LAYOUT */
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* FILTER */
+.filter {
+  width: 240px;
+  flex: 0 0 auto;
+}
+
+.mapBtn {
+  width: 100%;
+  padding: 12px;
+  background: #2f7cf6;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.filterBlock {
+  margin-bottom: 24px;
+}
+
+.filterBlock h4 {
+  margin: 0 0 10px;
+  font-weight: 800;
+}
+
+.filterBlock label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+/* LIST */
+.listSection {
+  flex: 1;
+  min-width: 0;
+}
+
+.resultTitle {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0 0 18px;
+}
+
+/* CARD LIST */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  gap: 24px;
+  background: #f4f8ff;
+  padding: 20px;
+  border-radius: 18px;
+}
+
+/* ✅ 카드가 좁아지지 않게 최소폭 보장 */
+.thumbnail {
+  width: 360px;
+  height: 170px;
+  background: #d9d9d9;
+  border-radius: 14px;
+  flex: 0 0 auto;
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardInfo h3 {
+  margin: 0 0 8px;
+  font-weight: 900;
+}
+
+.cardInfo p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* RATING */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.score {
+  background: #ffd84d;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 900;
+}
+
+.review {
+  font-size: 13px;
+  color: #555;
+}
+
+/* PAGINATION */
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 40px 0 60px;
+}
+
+.pageBtn,
+.pageNum {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.active {
+  background: #2f7cf6;
+  color: #fff;
+  border-color: #2f7cf6;
+}
+
+/* FOOTER */
+.footer {
+  width: 100%;
+  background: #0f1c2e;
+  color: #fff;
+  padding: 36px 0 18px;
+}
+
+.footerInner {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footerInner h4 {
+  margin: 0 0 10px;
+  font-weight: 900;
+}
+
+.footerInner p {
+  margin: 6px 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.footerBottom {
+  width: 1280px;
+  margin: 16px auto 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.7;
+}
