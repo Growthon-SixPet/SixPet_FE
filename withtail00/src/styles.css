@@ -1,0 +1,178 @@
+/* ✅ 앱 전체 래퍼: 위쪽부터 시작 + 가운데 정렬 */
+.appRoot {
+  height: 100%;
+  display: flex;
+  justify-content: center;   /* 가로 중앙 */
+  align-items: flex-start;   /* ✅ 세로 위쪽 */
+  padding-top: 24px;
+}
+
+/* ✅ 1280×1200 고정 프레임 */
+.frame1280 {
+  width: 1280px;
+  height: 1200px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3f0eb;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14);
+}
+
+/* ✅ 상단바 */
+.header {
+  height: 96px;
+  background: #f8efcf;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  /* ✅ 스크롤해도 헤더는 위에 남게 */
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoSlot {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px dashed rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandText {
+  font-size: 28px;
+  font-weight: 900;
+  color: #6aa9c9;
+  letter-spacing: -0.6px;
+}
+
+/* ✅ 프레임 내부 스크롤 영역 */
+.pageScroll {
+  height: calc(1200px - 96px); /* 헤더 높이 제외 */
+  overflow-y: auto;
+}
+
+/* ✅ 메인 섹션 */
+.hero {
+  min-height: 820px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+  padding: 40px 0;
+}
+
+.question {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 900;
+  color: #2e2e2e;
+  letter-spacing: -0.8px;
+}
+
+.cardsRow {
+  display: flex;
+  gap: 36px;
+}
+
+/* ✅ 카드 (button 기본 스타일 영향 제거 + hover 살림) */
+.card {
+  width: 520px;
+  height: 470px;
+  border-radius: 14px;
+
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fbf7f1;
+
+  cursor: pointer;
+  padding: 0;
+  overflow: hidden;
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.14);
+}
+
+.card:focus {
+  outline: none;
+}
+
+.card:focus-visible {
+  outline: 3px solid rgba(106, 169, 201, 0.6);
+  outline-offset: 4px;
+}
+
+/* ✅ 이미지 없는 상태: 상단 “이미지 영역” 플레이스홀더 */
+.cardImageArea {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardImageArea.isHospital {
+  background: #dfe9ee;
+}
+
+.cardImageArea.isFuneral {
+  background: #f2e7d9;
+}
+
+.placeholderIcon {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.placeholderText {
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+/* ✅ 카드 하단 텍스트 영역 */
+.cardTextArea {
+  height: 170px;
+  background: #fbf7f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cardTitle {
+  font-size: 34px;
+  font-weight: 900;
+  color: #2f2f2f;
+  letter-spacing: -0.8px;
+}
+
+.cardSubtitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* 스크롤 확인용 아래 여백 */
+.bottomSpacer {
+  height: 600px;
+}
