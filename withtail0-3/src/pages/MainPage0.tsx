@@ -20,7 +20,7 @@ export default function MainPage0() {
 
           <section className="mp0-cards">
             <article className="mp0-card">
-              <div className="mp0-iconCircle mp0-iconCircle--blue">❤️</div>
+              <div className="mp0-iconCircle mp0-iconCircle--blue"><img src = "../../images/Vector.png"></img></div>
               <h2 className="mp0-cardTitle">동물병원 찾기</h2>
               <p className="mp0-cardDesc">
                 반려동물의 건강을 위한 최고의 동물병원을<br />
@@ -32,7 +32,7 @@ export default function MainPage0() {
             </article>
 
             <article className="mp0-card">
-              <div className="mp0-iconCircle mp0-iconCircle--purple">🌸</div>
+              <div className="mp0-iconCircle mp0-iconCircle--purple"><img src = "../../images/mdi_flower-outline.png"></img></div>
               <h2 className="mp0-cardTitle">장례식장 찾기</h2>
               <p className="mp0-cardDesc">
                 소중한 반려동물을 위한 따뜻한 장례식장을<br />

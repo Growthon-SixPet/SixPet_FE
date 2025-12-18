@@ -126,14 +126,14 @@
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 10px 18px rgba(0,0,0,0.1);
-  padding: 36px 48px;
+  padding: 5px 25px;
   box-sizing: border-box;
 }
 
 .mp0-aboutTitle {
   font-size: 22px;
   font-weight: 900;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .mp0-aboutText {
