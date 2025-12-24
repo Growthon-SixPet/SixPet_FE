@@ -1,0 +1,259 @@
+/* ===== 공통 ===== */
+.mypage-wrapper {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 28px 0 60px;
+  background: #eef6fa;
+  font-family: Pretendard, sans-serif;
+}
+
+.mypage-inner {
+  width: 980px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ===== 사이드바 ===== */
+.sidebar {
+  width: 220px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  height: fit-content;
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 12px 0;
+}
+
+/* ✅ 박스 전체 클릭 */
+.sidebar-item {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sidebar-item:hover {
+  background: #f1f5f9;
+}
+
+.sidebar-item.active {
+  background: #2eaadc;
+  color: #ffffff;
+}
+
+.sidebar-withdraw {
+  margin-top: 10px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #ff0000;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ===== 메인 ===== */
+.main {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 22px;
+}
+
+.main h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.main-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 6px;
+}
+
+/* ===== 예약 카드 ===== */
+.reservation-list {
+  margin-top: 14px;
+}
+
+.reservation-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.card-image {
+  width: 150px;
+  height: 110px;
+  background: #f1f5f9;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.card-info {
+  flex: 1;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card-hospital-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.card-reviewcount {
+  color: #64748b;
+  font-weight: 800;
+}
+
+.card-sub {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 800;
+}
+
+.card-line {
+  margin-top: 10px;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.card-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.card-label {
+  width: 70px;
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 900;
+}
+
+.card-value {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 900;
+}
+
+.card-status.reserved {
+  color: #2563eb;
+  font-weight: 900;
+}
+
+.card-status.canceled {
+  color: #ff0000;
+  font-weight: 900;
+}
+
+/* ===== 우측 ===== */
+.card-actions {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.bookmark {
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: #2eaadc;
+  color: #ffffff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.cancel-btn:disabled {
+  background: #e2e8f0;
+  cursor: not-allowed;
+}
+
+/* ===== 페이지네이션 ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.page-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-weight: 900;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+}
+
+.page-btn.active {
+  background: #2eaadc;
+  color: #ffffff;
+}
