@@ -1,0 +1,60 @@
+@import url("https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css");
+
+* { font-family: Pretendard; }
+
+.wt-header {
+  height: 64px;
+  background: #2eaadc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+.wt-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wt-icon-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.wt-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wt-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.wt-brand-text {
+  color: #fff;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.wt-logout-btn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}

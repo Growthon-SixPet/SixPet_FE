@@ -1,0 +1,411 @@
+@import url("https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css");
+
+* {
+  box-sizing: border-box;
+  font-family: Pretendard, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+:root {
+  --brand: #2eaadc;
+  --bg: #eef3f7;
+  --white: #ffffff;
+  --line: #e2e8f0;
+  --text: #334155;
+  --sub: #94a3b8;
+  --muted: #64748b;
+  --danger: #ff0000;
+}
+
+/* 페이지 전체 스크롤 */
+.mp-page {
+  width: 100%;
+  background: var(--bg);
+}
+
+/* 1280 스테이지 */
+.mp-wrap {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+/* 가운데 카드 배치 */
+.mp-stage {
+  width: 940px;
+  margin: 0 auto;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* ===== Sidebar (슬림) ===== */
+.mp-sidebar {
+  width: 180px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 14px 12px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+.mp-sidebar-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.mp-side-item {
+  width: 100%;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  color: var(--muted);
+  text-align: left;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 12.5px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.mp-side-item.active {
+  background: var(--brand);
+  color: #fff;
+}
+
+.mp-side-item.withdraw {
+  color: var(--danger);
+  margin-bottom: 0;
+}
+
+/* ===== Content card ===== */
+.mp-main {
+  flex: 1;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 22px 26px 26px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+}
+
+/* header */
+.mp-main-header {
+  text-align: center;
+}
+
+.mp-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.mp-subtitle {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--sub);
+}
+
+.mp-top-line {
+  height: 1px;
+  background: var(--line);
+  margin: 14px 0 18px;
+}
+
+/* 프로필 정보 헤더 */
+.mp-profile-head {
+  margin-bottom: 12px;
+}
+
+.mp-profile-head-left {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  width: fit-content;
+}
+
+.mp-profile-head-line {
+  height: 1px;
+  background: var(--line);
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* body */
+.mp-content {
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+}
+
+/* left profile */
+.mp-profile-col {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.mp-avatar {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #f8fafc;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.mp-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(-45deg, #e5e7eb 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e5e7eb 75%),
+    linear-gradient(-45deg, transparent 75%, #e5e7eb 75%);
+  background-size: 18px 18px;
+  background-position: 0 0, 0 9px, 9px -9px, -9px 0px;
+  opacity: 0.7;
+}
+
+.mp-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* right table */
+.mp-info-col {
+  flex: 1;
+}
+
+.mp-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+}
+
+.mp-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* 기본 input */
+.mp-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.mp-input:focus {
+  background: #f8fafc;
+}
+
+/* ✅ 생일: 값 바로 옆에 아이콘이 붙도록 inline */
+.mp-birth-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;      /* ✅ 오른쪽 끝으로 늘어나지 않게 */
+}
+
+.mp-birth-text {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* 달력 버튼 */
+.mp-calendar-btn {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+
+  padding: 0;        
+  margin: 0;        
+}
+
+
+.mp-calendar-btn:hover {
+  background: #f1f5f9;
+}
+
+/* 실제 date input은 숨김 */
+.mp-date-hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+/* ✅ 성별 라디오 */
+.mp-gender {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mp-radio {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.mp-radio input {
+  accent-color: var(--brand);
+}
+
+/* ✅ 전화번호 readOnly 느낌 */
+.mp-readonly {
+  color: #64748b;
+  cursor: default;
+}
+
+.mp-readonly:focus {
+  background: transparent;
+}
+
+/* bottom */
+.mp-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+/* buttons */
+.mp-outline-btn {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mp-primary-btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ===== Modal ===== */
+.mp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.mp-modal {
+  width: 420px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.mp-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+}
+
+.mp-modal-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.mp-modal-x {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  color: #0f172a;
+}
+
+.mp-modal-divider {
+  height: 1px;
+  background: var(--line);
+}
+
+.mp-modal-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mp-modal-body.center {
+  align-items: center;
+  gap: 14px;
+}
+
+.mp-modal-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #f8fafc;
+}
+
+.mp-modal-input {
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  padding: 0 14px;
+  font-size: 13px;
+  outline: none;
+}
+
+.mp-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.mp-file {
+  display: none;
+}
