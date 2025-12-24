@@ -1,0 +1,45 @@
+.mp-sb {
+  width: 144px;          /* 피그마 */
+  min-height: 240px;     /* 피그마 */
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 10px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
+  box-sizing: border-box;
+}
+
+.mp-sb-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.mp-sb-item {
+  width: 100%;
+  height: 34px;
+  display: block;        /* ✅ 이거 중요: 가로로 붙는거 방지 */
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #64748b;
+  text-align: left;
+  padding: 0 10px;
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.mp-sb-item.active {
+  background: #2eaadc;
+  color: #ffffff;
+}
+
+.mp-sb-item.withdraw {
+  margin-top: 6px;
+  margin-bottom: 0;
+  color: #ff0000;
+  font-weight: 700;
+}

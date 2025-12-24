@@ -1,0 +1,13 @@
+@import url("https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css");
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  background-color: #E9EEF4; 
+  font-family: Pretendard, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
