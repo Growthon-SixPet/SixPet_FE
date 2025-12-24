@@ -69,14 +69,23 @@ const SignupInfo = () => {
           />
 
           {/* 다음 버튼 */}
-          <button
-            className={`next-btn ${isActive ? "active" : "disabled"}`}
-            disabled={!isActive}
-            onClick={() => navigate("/signup/verify")}
-
-          >
-            다음
-          </button>
+         <button
+  className={`next-btn ${isActive ? "active" : "disabled"}`}
+  disabled={!isActive}
+  onClick={() => {
+    sessionStorage.setItem(
+      "signupStep1",
+      JSON.stringify({
+        nickname,
+        password,
+        address,
+      })
+    );
+    navigate("/signup/verify");
+  }}
+>
+  다음
+</button>
 
           {/* 취소 */}
           <button className="cancel-btn" onClick={() => navigate("/")}>
