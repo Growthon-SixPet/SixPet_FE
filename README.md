@@ -1,3 +1,75 @@
-branch 관리해서 넣어주세요
+# 🐾 WithTail Frontend
 
-main 브랜치는 배포용 입니다.
+WithTail은 반려동물 병원 및 장례식장 예약을 돕는 서비스입니다.  
+본 레포지토리는 **사용자 인증(로그인/회원가입) 중심의 프론트엔드 구현**을 다룹니다.
+
+React + TypeScript 기반으로 UI/UX를 설계했으며,  
+실서비스를 가정한 **휴대폰 인증 플로우와 단계별 회원가입 경험**에 집중했습니다.
+
+---
+
+## ✨ 주요 기능
+
+- 로그인 / 회원가입 UI
+- 휴대폰 번호 인증 (SMS 인증 UX)
+- 단계별 회원가입 플로우
+  - 약관 동의
+  - 개인정보 입력
+  - 휴대폰 인증
+- 입력값 검증 및 버튼 활성/비활성 UX
+- 인증 타이머 및 재전송 처리
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend**
+  - React
+  - TypeScript
+  - Vite
+  - CSS (Vanilla CSS)
+
+- **State / Network**
+  - React Hooks
+  - Axios
+
+- **Collaboration**
+  - Git
+  - GitHub
+
+---
+
+## 🌿 Branch Strategy
+
+본 프로젝트는 **기능 단위 브랜치 전략**을 사용합니다.
+
+- **main**
+  - 배포 및 안정 버전 관리 브랜치
+  - 직접 커밋하지 않음
+  - Pull Request를 통해서만 병합
+
+
+- **feature-***
+  - 기능 단위 개발 브랜치
+  - 예: `feature-reservation`, `feature-profile`
+
+> 모든 신규 기능은 feature 브랜치에서 개발 후 main 브랜치로 병합합니다.
+
+---
+
+## 🔐 Authentication
+
+- 인증 방식: **JWT (Bearer Token)**
+- Swagger 기반 백엔드 API와 연동
+- 인증 관련 API
+  - 휴대폰 인증번호 발송
+  - 인증번호 검증
+  - 회원가입 등
+
+---
+
+## ▶️ Getting Started
+
+```bash
+npm install
+npm run dev
