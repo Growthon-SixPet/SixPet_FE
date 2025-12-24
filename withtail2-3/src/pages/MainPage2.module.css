@@ -1,0 +1,385 @@
+:root {
+  --brand: #2eaadc;
+  --bg: #ffffff;
+}
+
+.stage {
+  width: 1280px;
+  height: 832px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  margin: 0 auto;
+}
+
+.bodyScroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #f7f7f7;
+}
+
+/* ✅ 검색바 기준선을 mainGrid와 동일하게 */
+.searchWrap {
+  padding: 18px 0 10px;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.searchBar {
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchInputGroup {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+}
+
+.icon {
+  opacity: 0.7;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.searchBtn {
+  width: 170px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ✅ 메인 2컬럼 */
+.mainGrid {
+  width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px;
+  padding: 12px 0 28px;
+}
+
+/* ✅ 필터 */
+.filterCard {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  height: 350px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filterTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.filterIcon {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.filterTitle {
+  font-weight: 800;
+}
+
+.filterSection {
+  margin-top: 14px;
+}
+
+.filterLabel {
+  font-size: 12px;
+  color: #666;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.select {
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 0 10px;
+  outline: none;
+  background: #fff;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* ✅ 리스트 */
+.listArea {
+  min-height: 500px;
+}
+
+.resultTitle {
+  font-weight: 800;
+  margin: 8px 0 10px;
+}
+
+.empty {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 20px;
+  color: #666;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 130px 1fr 120px;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.cardLeft {
+  display: flex;
+}
+
+.thumb {
+  width: 130px;
+  height: 110px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f0f0f0;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbFallback {
+  font-weight: 900;
+  color: #999;
+}
+
+.cardMid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.hName {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.ratingWrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.star {
+  color: #f5b301;
+  font-size: 16px;
+}
+
+.ratingNum {
+  font-weight: 900;
+}
+
+.reviewCnt {
+  color: #666;
+  font-size: 13px;
+}
+
+.category {
+  color: #666;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.infoRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.infoIcon {
+  opacity: 0.75;
+}
+
+.infoText {
+  font-size: 13px;
+  color: #333;
+}
+
+.tagsRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.tagsText {
+  font-size: 12px;
+  color: #555;
+}
+
+.cardRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.bookmarkBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.detailBtn {
+  width: 92px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* ✅ 페이지네이션 */
+.pagination {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.pageNavBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.pageBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.pageBtnActive {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* ✅ 지역 드롭다운(스르륵) */
+.regionTrigger {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.regionChevron {
+  opacity: 0.6;
+  margin-left: 8px;
+}
+
+.regionDropdown {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  max-height: 0px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: max-height 220ms ease, opacity 220ms ease, transform 220ms ease;
+  z-index: 50;
+}
+
+.regionDropdownOpen {
+  max-height: 260px;
+  opacity: 1;
+  transform: translateY(0px);
+  pointer-events: auto;
+}
+
+.regionItem {
+  width: 100%;
+  border: none;
+  background: #fff;
+  padding: 12px 12px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.regionItem:hover {
+  background: #f3f7fb;
+}
