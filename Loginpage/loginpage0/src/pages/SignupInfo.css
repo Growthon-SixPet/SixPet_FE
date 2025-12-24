@@ -1,0 +1,108 @@
+* {
+  box-sizing: border-box;
+  font-family: Pretendard, sans-serif;
+}
+
+/* 배경 */
+.page-bg {
+  width: 100vw;
+  min-height: 100vh;
+  background: #f2f4f6;
+  display: flex;
+  justify-content: center;
+}
+
+/* 640 x 879 프레임 */
+.page-wrapper {
+  width: 640px;
+  height: 879px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 */
+.top-header {
+  height: 64px;
+  background: #5aa9d6;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 15px;
+}
+
+/* 콘텐츠 */
+.info-content {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 타이틀 */
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 40px;
+}
+
+/* 라벨 */
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* 입력 */
+.input {
+  height: 56px;
+  border-radius: 10px;
+  border: 1px solid #dbe1ea;
+  padding: 0 16px;
+  font-size: 18px;
+  margin-bottom: 28px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #5aa9d6;
+}
+
+/* 버튼 */
+.next-btn {
+  height: 64px;
+  border-radius: 12px;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.next-btn.disabled {
+  background: #949494;
+  color: white;
+}
+
+.next-btn.active {
+  background: #2eaadc;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}

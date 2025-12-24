@@ -1,0 +1,119 @@
+* {
+  box-sizing: border-box;
+  font-family: Pretendard, sans-serif;
+}
+
+/* 배경 */
+.page-bg {
+  width: 100vw;
+  min-height: 100vh;
+  background: #f2f4f6;
+  display: flex;
+  justify-content: center;
+}
+
+/* 640 프레임 */
+.page-wrapper {
+  width: 640px;
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 */
+.top-header {
+  height: 64px;
+  background: #5aa9d6;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 15px;
+}
+
+/* 콘텐츠 */
+.terms-content {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 타이틀 */
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 40px;
+}
+
+/* 전체 동의 */
+.agree-all {
+  background: #eef2f7;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+/* 개별 동의 */
+.agree-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.agree-list label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+}
+
+/* 필수 강조 */
+.required {
+  color: #ef4444;
+  margin-right: 4px;
+}
+
+/* 버튼 */
+.next-btn {
+  height: 64px;
+  border-radius: 12px;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.next-btn.disabled {
+  background: #949494;
+  color: white;
+}
+
+.next-btn.active {
+  background: #2eaadc;
+  color: white;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}

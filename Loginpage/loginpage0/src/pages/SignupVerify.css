@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+  font-family: Pretendard, sans-serif;
+}
+
+.page-bg {
+  width: 100vw;
+  min-height: 100vh;
+  background: #f2f4f6;
+  display: flex;
+  justify-content: center;
+}
+
+.page-wrapper {
+  width: 640px;
+  height: 879px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-header {
+  height: 64px;
+  background: #5aa9d6;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+}
+
+.verify-content {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input,
+select {
+  height: 57px;               
+  border-radius: 10px;
+  border: 1px solid #dbe1ea;
+  padding: 0 16px;
+  font-size: 16px;
+  background: white;
+  overflow-y: auto;           
+}
+
+select option {
+  padding: 12px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #5aa9d6;
+}
+
+.birth-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.birth-row select {
+  flex: 1;
+}
+
+.gender-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.phone-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.phone-row .input {
+  flex: 1;
+}
+
+.request-btn,
+.confirm-btn {
+  width: 120px;
+  height: 55px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+}
+
+.confirm-btn.disabled {
+  background: #64748B;
+  color: white;
+}
+
+.confirm-btn.active {
+  background: #2eaadc; 
+  color: white;
+  cursor: pointer;
+}
+
+.request-btn.disabled {
+  background: #9ca3af;
+  color: white;
+}
+
+.request-btn.active {
+  background: #2eaadc;
+  color: white;
+  cursor: pointer;
+}
+
+.confirm-btn {
+  background: #2eaadc;
+  color: white;
+}
+
+.complete-btn {
+  height: 64px;
+  border-radius: 12px;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.complete-btn.disabled {
+  background: #9ca3af;
+  color: white;
+}
+
+.complete-btn.active {
+  background: #2eaadc;
+  color: white;
+}
+
+.cancel-btn {
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 18px;
+}
