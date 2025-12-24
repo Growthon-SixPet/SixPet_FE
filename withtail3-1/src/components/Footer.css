@@ -1,0 +1,28 @@
+@import url("https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css");
+
+* { font-family: Pretendard; }
+
+.wt-footer {
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 18px 0;
+}
+
+.wt-footer-inner {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wt-footer-title {
+  font-weight: 800;
+  color: #334155;
+}
+
+.wt-footer-text {
+  font-size: 12px;
+  color: #64748b;
+}

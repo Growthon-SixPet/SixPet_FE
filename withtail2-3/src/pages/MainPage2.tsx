@@ -279,7 +279,7 @@ export default function MainPage2() {
               <input
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                placeholder="치과"
+                placeholder="진료과목 / 병원명"
                 style={styles.searchInput}
               />
             </div>
@@ -289,7 +289,7 @@ export default function MainPage2() {
               <input
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                placeholder="서울"
+                placeholder="지역"
                 style={styles.searchInput}
               />
             </div>
@@ -615,21 +615,25 @@ const styles: Record<string, React.CSSProperties> = {
   },
 
   mainGrid: {
-    width: "1100px",
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "240px 1fr",
-    gap: "18px",
-    padding: "12px 0 28px",
+  width: "1000px",                 // ✅ 전체 폭 살짝 넓혀서 와이어프레임 느낌
+  margin: "0 auto",
+  display: "grid",
+  gridTemplateColumns: "180px 1fr", // ✅ 필터폭에 맞게 줄임 (거리 확 줄어듦)
+  gap: "12px",                      // ✅ 간격도 더 좁게
+  padding: "12px 0 28px",
   },
 
+
   filterCard: {
-    background: "#fff",
-    borderRadius: "12px",
-    border: "1px solid #e5e5e5",
-    padding: "14px",
-    height: "fit-content",
+  background: "#fff",
+  borderRadius: "12px",
+  border: "1px solid #e5e5e5",
+  padding: "10px",
+  height: "350px",
+  width: "100%",     // ✅ 컬럼 폭 꽉 채우기
+  boxSizing: "border-box",
   },
+
 
   filterTitleRow: {
     display: "flex",

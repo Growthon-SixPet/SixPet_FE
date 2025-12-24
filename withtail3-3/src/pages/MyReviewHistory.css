@@ -1,0 +1,288 @@
+/* ✅ Pretendard: 이미 프로젝트에서 불러오고 있으면 이 @import는 빼도 됨 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css");
+
+:root {
+  --brand: #2eaadc;
+  --bg: #edfaff; /* 네가 쓰던 페이지 배경 */
+  --text: #0f172a;
+  --muted: #64748b;
+  --white: #ffffff;
+  --danger: #ff0000;
+  --border: #e6edf5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wr-page {
+  font-family: "Pretendard", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+
+  /* ✅ "페이지 전체 스크롤"을 위해 고정 높이/overflow 제한 안 함 */
+  min-height: 100vh;
+}
+
+/* 협업 전 임시 상단바/푸터 자리(나중에 Header/Footer로 교체) */
+.wr-header-placeholder {
+  height: 64px;
+  background: var(--brand);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+.wr-footer-placeholder {
+  height: 72px;
+  background: transparent;
+}
+
+/* ✅ 1280 기준 가운데 정렬 */
+.wr-main {
+  width: 1280px;
+  margin: 0 auto;
+  padding: 40px 0 60px;
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+/* ---------------- Sidebar ---------------- */
+.wr-sidebar {
+  width: 220px;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 18px 14px;
+}
+
+.wr-sidebar-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding: 6px 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wr-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.wr-nav-item {
+  display: block;
+  width: 100%;
+  border: 1px solid transparent;
+  background: var(--white);
+  color: var(--muted);
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.wr-nav-item:hover {
+  border-color: var(--border);
+  background: #f7fbff;
+}
+
+.wr-nav-item.active {
+  background: var(--brand); /* ✅ 2EAADC */
+  color: #ffffff; /* ✅ FFFFFF */
+}
+
+/* 회원탈퇴: 항상 흰색 배경 + 빨간 글씨 */
+.wr-withdraw {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--white);
+  color: var(--danger);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.wr-withdraw:hover {
+  border-color: #ffd0d0;
+  background: #fff5f5;
+}
+
+/* ---------------- Content ---------------- */
+.wr-content {
+  flex: 1;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 28px 28px 24px;
+}
+
+.wr-content-head {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+
+.wr-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: #475569;
+}
+
+.wr-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.wr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 12px 0 8px;
+}
+
+.wr-empty {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* 후기 카드 */
+.wr-card {
+  position: relative;
+  border: 1px solid #dbe7f3;
+  border-radius: 12px;
+  background: var(--white);
+  padding: 22px 22px 18px;
+}
+
+.wr-delete {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wr-delete:hover {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+.wr-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.wr-writer {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.wr-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wr-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #dbe7f3;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.wr-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 6px 0 10px;
+}
+
+.wr-stars {
+  display: inline-flex;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.wr-star {
+  color: #cbd5e1;
+}
+.wr-star.filled {
+  color: #f5b301; /* 노랑 별 */
+}
+
+.wr-date {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.wr-text {
+  margin: 0;
+  font-size: 14px;
+  color: #2563eb; /* 스샷처럼 파란 느낌 */
+  font-weight: 600;
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
+/* ---------------- Pagination ---------------- */
+.wr-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 18px;
+}
+
+.wr-page-btn,
+.wr-page-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.wr-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.wr-page-num.active {
+  background: #2b7fff;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* ---------------- Responsive (선택) ---------------- */
+/* 화면이 작아지면 자연스럽게 줄어들게 */
+@media (max-width: 1320px) {
+  .wr-main {
+    width: 100%;
+    padding: 32px 16px 60px;
+  }
+}
