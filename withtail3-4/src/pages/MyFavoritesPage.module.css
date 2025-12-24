@@ -1,0 +1,297 @@
+.pageRoot {
+  width: 100%;
+  min-height: 100vh;
+  font-family: Pretendard, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: #E9EEF4; /* ✅ 요구 배경색 */
+}
+
+.main {
+  width: 1280px;       /* ✅ 1280 */
+  min-height: 832px;   /* ✅ 832 */
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 220px;
+  height: fit-content;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 14px;
+  box-sizing: border-box;
+}
+
+.sidebarTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+.sidebarDivider {
+  height: 1px;
+  background: #e6eef3;
+  margin-bottom: 10px;
+}
+
+.sidebarItem {
+  width: 100%;
+  border: none;
+  background: #ffffff;
+  color: #64748b;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.sidebarItem:hover {
+  background: #f3fbfd;
+}
+
+.sidebarItemActive {
+  background: #2eaadc;
+  color: #ffffff;
+}
+
+.withdrawItem {
+  width: 100%;
+  border: none;
+  background: #ffffff;
+  color: #ff0000;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.withdrawItem:hover {
+  background: #fff3f3;
+}
+
+.content {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px 22px 18px;
+  box-sizing: border-box;
+}
+
+.contentHeader {
+  padding: 4px 4px 12px;
+}
+
+.contentTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.contentDesc {
+  margin: 6px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.contentDivider {
+  height: 1px;
+  background: #e6eef3;
+  margin: 10px 0 18px;
+}
+
+/* 2x2 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 260px);
+  gap: 26px 36px;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card {
+  width: 260px;
+  border: 1px solid #e6eef3;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card:focus {
+  outline: 2px solid #2eaadc;
+  outline-offset: 2px;
+}
+
+/* ✅ 이미지 */
+.cardImage {
+  width: 100%;
+  height: 140px;
+  background: #f2f6f9;
+}
+
+.cardImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    #f2f6f9,
+    #f2f6f9 10px,
+    #e9eff4 10px,
+    #e9eff4 20px
+  );
+}
+
+.cardImageImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardBody {
+  padding: 12px 12px 14px;
+}
+
+/* 배지 */
+.typeBadge {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #eef3f7;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+/* ✅ 이름줄 + 북마크(오른쪽) */
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.placeName {
+  font-size: 14px;
+  font-weight: 900;
+  color: #000000;
+  line-height: 1.2;
+}
+
+.bookmarkInlineBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-top: -2px; /* ✅ 원본처럼 약간 위로 */
+}
+
+.bookmarkInlineBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.ratingText {
+  font-size: 13px;
+  font-weight: 900;
+  color: #000000;
+}
+
+.infoRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.infoText {
+  font-size: 12px;
+  font-weight: 700;
+  color: #aab2b8;
+  line-height: 1.35;
+}
+
+.closedLabel {
+  color: #ff0000;
+  font-weight: 900;
+}
+
+.openLabel {
+  color: #22c55e;
+  font-weight: 900;
+}
+
+.hoursText {
+  color: #aab2b8;
+  font-weight: 800;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 0 6px;
+}
+
+.pageBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #e6eef3;
+  background: #ffffff;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.pageBtn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pageNum {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #e6eef3;
+  background: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  cursor: pointer;
+  color: #0f172a;
+}
+
+.pageNumActive {
+  background: #2eaadc;
+  color: #ffffff;
+  border-color: #2eaadc;
+}
