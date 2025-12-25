@@ -5,10 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./MainPage2.module.css";
 
-import {
-  fetchHospitals, 
-  fetchHospitalsBasic,
-} from "../api/hospitals";
+import { fetchHospitals, fetchHospitalsBasic } from "../api/hospitals";
 
 import type {
   RegionEnum,
@@ -72,7 +69,7 @@ const REGION_MAP: Record<Region, RegionEnum> = {
   제주: "JEJU",
 };
 
-const PER_PAGE = 5; 
+const PER_PAGE = 5;
 const WINDOW_SIZE = 4;
 
 type UIHospital = {
@@ -112,10 +109,19 @@ function mapApiToUI(h: Hospital): UIHospital {
 
 type Mode = "BASIC" | "FILTER";
 
+function getToken() {
+  const t = localStorage.getItem("accessToken");
+  if (!t) return null;
+  const v = t.trim();
+  if (!v) return null;
+  if (v === "null" || v === "undefined") return null;
+  return v;
+}
+
 export default function MainPage2() {
   const navigate = useNavigate();
 
-  const { isInterested, toggle } = useInterest();
+  const { isInterested, toggle, isLoggedIn } = useInterest();
 
   const [keywordInput, setKeywordInput] = useState("");
 
@@ -192,10 +198,8 @@ export default function MainPage2() {
         let res: ApiResponse<HospitalPage>;
 
         if (mode === "BASIC") {
-          console.log("[API] BASIC -> GET /hospitals/search", basicParams);
           res = await fetchHospitalsBasic(basicParams as any);
         } else {
-          console.log("[API] FILTER -> GET /hospitals", filterParams);
           res = await fetchHospitals(filterParams as any);
         }
 
@@ -211,7 +215,6 @@ export default function MainPage2() {
           setTotalPages(Math.max(1, res.result.totalPages ?? 1));
         }
       } catch (e) {
-        console.error(e);
         if (!ignore) {
           setError("병원 목록을 불러오지 못했습니다.");
           setItems([]);
@@ -500,10 +503,19 @@ export default function MainPage2() {
                       <button
                         onClick={async (e) => {
                           e.stopPropagation();
+
+                          if (!isLoggedIn || !getToken()) {
+                            alert("로그인이 필요한 서비스입니다.");
+                            return;
+                          }
+
                           try {
                             await toggle("HOSPITAL", h.id);
-                          } catch (err) {
-                            console.error(err);
+                          } catch (err: any) {
+                            if (err?.message === "LOGIN_REQUIRED") {
+                              alert("로그인이 필요한 서비스입니다.");
+                              return;
+                            }
                             alert("즐겨찾기 처리에 실패했습니다.");
                           }
                         }}
