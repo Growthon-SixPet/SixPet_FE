@@ -19,7 +19,7 @@ const formatPhoneNumber = (value: string) => {
 export default function ReservationModal({ hospitalId, onClose }: Props) {
   const [open, setOpen] = useState(false);
 
-  /* 🔥 form state 통일 (phoneNumber 사용) */
+  /* form state 통일 (phoneNumber 사용) */
   const [form, setForm] = useState({
     petName: "",
     ownerName: "",
@@ -51,7 +51,7 @@ export default function ReservationModal({ hospitalId, onClose }: Props) {
 
     const payload = {
       ownerName: form.ownerName.trim(),
-      phoneNumber: form.phoneNumber, // 🔥 하이픈 포함
+      phoneNumber: form.phoneNumber, 
       petName: form.petName.trim(),
       reservationDate: form.date,
       reservationTime: form.time,
@@ -135,12 +135,50 @@ export default function ReservationModal({ hospitalId, onClose }: Props) {
           onChange={(e) => setForm({ ...form, reason: e.target.value })}
         />
 
-        <button style={submitBtn} onClick={submit}>
-          예약 요청하기
-        </button>
-        <button style={cancelBtn} onClick={onClose}>
-          취소
-        </button>
+     <div
+  style={{
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: 16,
+    marginTop: 32,
+  }}
+>
+  {/* 취소 */}
+  <button
+    onClick={onClose}
+    style={{
+      width: 140,
+      height: 56,
+      borderRadius: 16,
+      border: "2px solid #d9e1ea",
+      background: "#fff",
+      color: "#5f6b7a",
+      fontSize: 18,
+      fontWeight: 600,
+      cursor: "pointer",
+    }}
+  >
+    취소
+  </button>
+
+  {/* 저장(예약) */}
+  <button
+    onClick={submit}
+    style={{
+      width: 140,
+      height: 56,
+      borderRadius: 16,
+      border: "none",
+      background: "#5ba9d6",
+      color: "#fff",
+      fontSize: 18,
+      fontWeight: 700,
+      cursor: "pointer",
+    }}
+  >
+    예약
+  </button>
+</div>
       </div>
     </div>
   );
@@ -246,3 +284,4 @@ const cancelBtn: React.CSSProperties = {
   borderRadius: 8,
   marginTop: 12,
 };
+
