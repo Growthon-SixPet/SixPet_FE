@@ -1,0 +1,420 @@
+/* =========================
+   BASE
+   ========================= */
+
+.mp2 {
+  width: 100%;
+  min-height: 1200px;
+  background: #ffffff;
+  color: #111;
+  overflow-x: hidden;
+  display: block;
+}
+
+/* 상단바 자리만 확보 */
+.mp2-header-placeholder {
+  height: 72px;
+}
+
+/* =========================
+   ✅ 1280 컨텐츠 + 마진 240 (기본)
+   - 1760px 화면이면 정확히 좌우 240
+   - 더 큰 화면에서도 컨텐츠는 1280 유지
+   ========================= */
+
+.mp2-shell {
+  width: 1280px;              /* ✅ 컨텐츠 폭 고정 1280 */
+  margin-left: 240px;         /* ✅ 마진 240 */
+  margin-right: 240px;        /* ✅ 마진 240 */
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 36px;
+  padding-top: 28px;
+  align-items: start;
+}
+
+/* 화면이 1760보다 작아지면 깨지니까 마진 줄임 */
+@media (max-width: 1760px) {
+  .mp2-shell {
+    width: calc(100% - 240px); /* 좌우 합 240만큼만 남겨서 안전하게 */
+    margin: 0 120px;
+  }
+}
+@media (max-width: 1400px) {
+  .mp2-shell {
+    width: calc(100% - 80px);
+    margin: 0 40px;
+  }
+}
+
+/* =========================
+   LEFT
+   ========================= */
+
+.mp2-left {
+  position: sticky;
+  top: 92px;
+  padding-top: 52px; /* 오른쪽 리스트 시작점과 맞춤 */
+}
+
+.mp2-mapCard {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.mp2-mapThumb {
+  width: 100%;
+  height: 132px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 30% 30%, #d9f2ff 0%, transparent 55%),
+    radial-gradient(circle at 70% 65%, #d8ffe5 0%, transparent 60%),
+    linear-gradient(135deg, #eaf0ff, #f6fff1);
+  border: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mp2-mapBtn {
+  border: 0;
+  background: #2f76ff;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mp2-filterBtn {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #e6e6e6;
+  background: #ffffff;
+  border-radius: 18px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+.mp2-filterBox {
+  border-top: 1px solid #e9e9e9;
+  padding-top: 14px;
+}
+
+.mp2-filterTitle {
+  font-size: 14px;
+  font-weight: 800;
+  margin: 14px 0 10px;
+}
+
+.mp2-check {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  padding: 7px 0;
+}
+
+.mp2-divider {
+  height: 1px;
+  background: #e9e9e9;
+  margin: 14px 0;
+}
+
+/* =========================
+   RIGHT
+   ========================= */
+
+.mp2-right {
+  min-width: 0;
+}
+
+.mp2-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+
+.mp2-list {
+  display: grid;
+  gap: 22px;
+}
+
+/* 카드 */
+.mp2-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* ✅ 이미지가 설명박스 높이에 맞춰 늘어남 */
+.mp2-photo {
+  width: 340px;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #ededed;
+  align-self: stretch;
+}
+
+.mp2-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 설명 박스 */
+.mp2-info {
+  width: 100%;
+  background: #f7fbff;
+  border: 1px solid #eaf0ff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-sizing: border-box;
+}
+
+.mp2-kind {
+  font-size: 11px;
+  color: #6b6b6b;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.mp2-name {
+  font-size: 15px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.mp2-row {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  margin: 6px 0;
+}
+
+.mp2-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================
+   ✅ 가격 라인: "가격이 안 보이는 문제" 완전 해결
+   - flex 말고 grid로 고정폭을 잡아서
+     마지막 가격이 절대 밀려서 사라지지 않음
+   ========================= */
+
+.mp2-priceRow {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+}
+
+.mp2-priceLine {
+  display: grid;
+  grid-template-columns: 42px 1fr 86px; /* ✅ 왼쪽라벨/점선/가격 고정폭 */
+  align-items: center;
+  column-gap: 10px;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.mp2-priceLine > span:first-child {
+  white-space: nowrap;
+}
+
+.mp2-priceLine > span:last-child {
+  white-space: nowrap;
+  text-align: right;
+  justify-self: end;          /* ✅ 오른쪽 끝에 고정 */
+  color: #111;                /* ✅ 혹시라도 색 상속 깨져도 보이게 */
+}
+
+.mp2-dash {
+  height: 1px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    #cfcfcf 0px,
+    #cfcfcf 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+/* 평점 */
+.mp2-scoreRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mp2-scoreBadge {
+  background: #ffcc00;
+  font-weight: 900;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.mp2-rev {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 즐겨찾기 */
+.mp2-like {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+/* 페이지네이션 */
+.mp2-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 26px 0 34px;
+}
+
+.mp2-pageBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.mp2-pageBtn.active {
+  background: #2f76ff;
+  color: #fff;
+  border-color: #2f76ff;
+}
+
+/* =========================
+   ✅ 푸터 (1280 라인 + 마진240 기준)
+   ========================= */
+
+.mp2-footer {
+  background: #0f1a2a;
+  color: #d7dde8;
+
+  width: 1280px;
+  margin-left: 240px;
+  margin-right: 240px;
+
+  padding: 26px 26px 16px;
+  border-radius: 10px 10px 0 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1760px) {
+  .mp2-footer {
+    width: calc(100% - 240px);
+    margin: 0 120px;
+  }
+}
+@media (max-width: 1400px) {
+  .mp2-footer {
+    width: calc(100% - 80px);
+    margin: 0 40px;
+  }
+}
+
+.mp2-footerGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.mp2-footerBrand {
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.mp2-footerTitle {
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.mp2-footerText {
+  font-size: 12px;
+  color: #b9c2d3;
+  line-height: 1.6;
+}
+
+.mp2-footerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 12px;
+  color: #b9c2d3;
+}
+
+.mp2-footerBottom {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  font-size: 12px;
+  color: #9aa6bd;
+}
+
+/* =========================
+   모바일
+   ========================= */
+
+@media (max-width: 1100px) {
+  .mp2-shell {
+    width: auto;
+    margin: 0 20px;
+    grid-template-columns: 1fr;
+  }
+
+  .mp2-left {
+    position: static;
+    padding-top: 0;
+  }
+
+  .mp2-card {
+    grid-template-columns: 1fr;
+  }
+
+  .mp2-photo {
+    width: 100%;
+    height: 200px;
+  }
+
+  .mp2-footer {
+    width: auto;
+    margin: 0 20px;
+  }
+
+  .mp2-footerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
