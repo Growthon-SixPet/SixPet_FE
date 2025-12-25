@@ -4,27 +4,26 @@
 }
 
 .stage {
-  width: 1280px;
-  height: 832px;
+  min-height: max(832px, 100vh);
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  border: 1px solid #ddd;
   margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
 }
+
 
 .bodyScroll {
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible;
   background: #f7f7f7;
 }
 
 .searchWrap {
-  padding: 18px 0 10px;
-  width: 1000px;
-  margin: 0 auto;
+  padding: 18px 240px 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .searchBar {
@@ -36,6 +35,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  box-sizing: border-box;
 }
 
 .searchInputGroup {
@@ -47,6 +47,7 @@
   align-items: center;
   gap: 8px;
   background: #fff;
+  box-sizing: border-box;
 }
 
 .icon {
@@ -58,6 +59,7 @@
   border: none;
   outline: none;
   font-size: 14px;
+  background: transparent;
 }
 
 .searchBtn {
@@ -72,12 +74,12 @@
 }
 
 .mainGrid {
-  width: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 12px 240px 28px;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 180px 1fr;
   gap: 12px;
-  padding: 12px 0 28px;
 }
 
 .filterCard {
@@ -348,7 +350,6 @@
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-
   max-height: 0px;
   opacity: 0;
   transform: translateY(-8px);
@@ -376,4 +377,16 @@
 
 .regionItem:hover {
   background: #f3f7fb;
+}
+
+@media (max-width: 1280px) {
+  .searchWrap {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .mainGrid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
