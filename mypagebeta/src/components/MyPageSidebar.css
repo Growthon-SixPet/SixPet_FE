@@ -1,7 +1,6 @@
 .mp-sb {
-  width: 144px;          /* 피그마 */
-  min-height: 240px;     /* 피그마 */
-  background: #ffffff;
+  width: 144px;          
+  min-height: 240px;    
   border-radius: 12px;
   padding: 14px 10px;
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04);
@@ -18,7 +17,7 @@
 .mp-sb-item {
   width: 100%;
   height: 34px;
-  display: block;        /* ✅ 이거 중요: 가로로 붙는거 방지 */
+  display: block;        
   border: none;
   border-radius: 8px;
   background: transparent;

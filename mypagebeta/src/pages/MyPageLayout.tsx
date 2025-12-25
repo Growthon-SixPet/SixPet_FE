@@ -17,7 +17,6 @@ export default function MyPageLayout() {
     if (path.startsWith("/mypage/review")) return "review";
     if (path.startsWith("/mypage/favorites")) return "favorites";
 
-    // 기본
     return "profile";
   };
 

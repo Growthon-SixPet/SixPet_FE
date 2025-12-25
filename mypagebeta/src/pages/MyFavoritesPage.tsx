@@ -1,303 +1,282 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./MyFavoritesPage.module.css";
+import React, { useMemo, useState, useEffect } from "react";
+import "./MyPageReservation.css";
 
-type FavoritePlaceType = "HOSPITAL" | "FUNERAL";
+import {
+  fetchMyReservations,
+  cancelReservation,
+  type ApiReservation,
+} from "../api/reservations";
 
-export type FavoritePlace = {
-  id: number | string;
-  type: FavoritePlaceType;
+import { useInterest } from "../contexts/InterestContext";
 
-  name: string;
+type ReservationStatus = "RESERVED" | "CANCELED";
+
+
+type Reservation = {
+  id: number;
+
+  targetType: "HOSPITAL" | "FUNERAL";
+  targetId: number;
+
+  hospitalName: string;
+  hospitalCategoryLabel: string;
   rating: number;
   reviewCount: number;
-
-  address: string;
-  detailAddress?: string;
-
-  is24Hours?: boolean;
-  businessHoursText: string;
-  isOpenNow?: boolean;
-  openTime?: string;
-  closeTime?: string;
-
-  imageUrl?: string;
+  reservationNumber: string;
+  reservedDate: string;
+  petName: string;
+  petSpeciesSex: string;
+  status: ReservationStatus;
 };
 
-const ITEMS_PER_PAGE = 4;
-
-function parseHHMMToMinutes(hhmm: string) {
-  const [h, m] = hhmm.split(":").map((v) => Number(v));
-  if (Number.isNaN(h) || Number.isNaN(m)) return null;
-  return h * 60 + m;
-}
-
-function computeIsOpenNow(p: FavoritePlace) {
-  if (typeof p.isOpenNow === "boolean") return p.isOpenNow;
-  if (p.is24Hours) return true;
-
-  if (!p.openTime || !p.closeTime) return false;
-
-  const open = parseHHMMToMinutes(p.openTime);
-  const close = parseHHMMToMinutes(p.closeTime);
-  if (open == null || close == null) return false;
-
-  const now = new Date();
-  const nowMin = now.getHours() * 60 + now.getMinutes();
-
-  if (open <= close) return nowMin >= open && nowMin <= close;
-  return nowMin >= open || nowMin <= close;
-}
-
-function getTypeLabel(type: FavoritePlaceType) {
-  return type === "HOSPITAL" ? "동물병원" : "장례식장";
-}
-
-export default function MyFavoritesPage() {
-  const navigate = useNavigate();
-
-  const [favorites, setFavorites] = useState<FavoritePlace[]>([
-    {
-      id: 1,
-      type: "HOSPITAL",
-      name: "그레이스 고양이 동물병원",
-      rating: 4.9,
-      reviewCount: 312,
-      address: "서울 강남구 선릉로 152길 17",
-      detailAddress: "아시아상담뷰티크 3층",
-      businessHoursText: "10:00~18:00",
-      openTime: "10:00",
-      closeTime: "18:00",
-    },
-    {
-      id: 2,
-      type: "HOSPITAL",
-      name: "24시 동물 응급센터",
-      rating: 4.9,
-      reviewCount: 312,
-      address: "서울 강남구 선릉로 152길 17",
-      detailAddress: "아시아상담뷰티크 3층",
-      businessHoursText: "24시간운영",
-      is24Hours: true,
-    },
-    {
-      id: 3,
-      type: "FUNERAL",
-      name: "하늘정원 반려동물 장례식장",
-      rating: 4.8,
-      reviewCount: 198,
-      address: "서울 강남구 ○○로 10",
-      detailAddress: "1층",
-      businessHoursText: "09:00~21:00",
-      openTime: "09:00",
-      closeTime: "21:00",
-    },
-    {
-      id: 4,
-      type: "FUNERAL",
-      name: "별빛 반려동물 추모관",
-      rating: 4.7,
-      reviewCount: 86,
-      address: "서울 강남구 △△로 22",
-      detailAddress: "2층",
-      businessHoursText: "10:00~19:00",
-      openTime: "10:00",
-      closeTime: "19:00",
-    },
-  ]);
-
-  const [page, setPage] = useState(1);
-
-  const totalPages = useMemo(() => {
-    return Math.max(1, Math.ceil(favorites.length / ITEMS_PER_PAGE));
-  }, [favorites.length]);
-
-  useEffect(() => {
-    if (page > totalPages) setPage(totalPages);
-  }, [page, totalPages]);
-
-  const pageItems = useMemo(() => {
-    const start = (page - 1) * ITEMS_PER_PAGE;
-    return favorites.slice(start, start + ITEMS_PER_PAGE);
-  }, [favorites, page]);
-
-  const onToggleBookmark = async (place: FavoritePlace) => {
-    setFavorites((prev) => prev.filter((p) => !(p.id === place.id && p.type === place.type)));
-  };
-
-  const goPlaceDetail = (place: FavoritePlace) => {
-    if (place.type === "HOSPITAL") navigate(`/hospitals/${place.id}`);
-    if (place.type === "FUNERAL") navigate(`/funerals/${place.id}`);
-  };
-
+function BookmarkIcon({ filled }: { filled: boolean }) {
   return (
-    <section className={styles.content}>
-    <div className={styles.graybox}>
-      <div className={styles.contentHeader}>
-        <h1 className={styles.contentTitle}>나의 즐겨찾기</h1>
-        <p className={styles.contentDesc}>고객님께서 즐겨찾기한 장소 목록입니다.</p>
-      </div>
-      <div className={styles.contentDivider} />
-      </div>
-
-      <div className={styles.grid}>
-        {pageItems.map((p) => {
-          const isOpen = computeIsOpenNow(p);
-
-          return (
-            <div
-              key={`${p.type}-${p.id}`}
-              className={styles.card}
-              role="button"
-              tabIndex={0}
-              onClick={() => goPlaceDetail(p)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") goPlaceDetail(p);
-              }}
-            >
-              <div className={styles.cardImage}>
-                {p.imageUrl ? (
-                  <img className={styles.cardImageImg} src={p.imageUrl} alt={p.name} />
-                ) : (
-                  <div className={styles.cardImagePlaceholder} />
-                )}
-              </div>
-
-              <div className={styles.cardBody}>
-                <div className={styles.typeBadge}>{getTypeLabel(p.type)}</div>
-
-                <div className={styles.titleRow}>
-                  <div className={styles.placeName}>{p.name}</div>
-                  <button
-                    type="button"
-                    className={styles.bookmarkInlineBtn}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onToggleBookmark(p);
-                    }}
-                    aria-label="즐겨찾기 해제"
-                    title="즐겨찾기 해제"
-                  >
-                    <BookmarkIcon />
-                  </button>
-                </div>
-
-                <div className={styles.ratingRow}>
-                  <StarIcon />
-                  <span className={styles.ratingText}>
-                    {p.rating.toFixed(1)} ({p.reviewCount})
-                  </span>
-                </div>
-
-                <div className={styles.infoRow}>
-                  <PinIcon />
-                  <div className={styles.infoText}>
-                    <div>{p.address}</div>
-                    {p.detailAddress && <div>{p.detailAddress}</div>}
-                  </div>
-                </div>
-
-                <div className={styles.infoRow}>
-                  <ClockIcon />
-                  <div className={styles.infoText}>
-                    {isOpen ? (
-                      <div>
-                        <span className={styles.openLabel}>진료중</span>
-                        <span className={styles.hoursText}> • {p.businessHoursText}</span>
-                      </div>
-                    ) : (
-                      <div>
-                        <span className={styles.closedLabel}>진료 종료</span>
-                        <span className={styles.hoursText}> • {p.businessHoursText}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className={styles.pagination}>
-        <button
-          type="button"
-          className={styles.pageBtn}
-          onClick={() => setPage((v) => Math.max(1, v - 1))}
-          disabled={page === 1}
-          aria-label="이전 페이지"
-        >
-          ‹
-        </button>
-
-        {Array.from({ length: totalPages }).map((_, idx) => {
-          const p = idx + 1;
-          return (
-            <button
-              key={p}
-              type="button"
-              className={[styles.pageNum, p === page ? styles.pageNumActive : ""].join(" ")}
-              onClick={() => setPage(p)}
-            >
-              {p}
-            </button>
-          );
-        })}
-
-        <button
-          type="button"
-          className={styles.pageBtn}
-          onClick={() => setPage((v) => Math.min(totalPages, v + 1))}
-          disabled={page === totalPages}
-          aria-label="다음 페이지"
-        >
-          ›
-        </button>
-      </div>
-    </section>
-  );
-}
-
-/* ===== Icons ===== */
-
-function BookmarkIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M6 3.5C6 2.67 6.67 2 7.5 2H16.5C17.33 2 18 2.67 18 3.5V21L12 17.5L6 21V3.5Z"
-        stroke="#FF0000"
-        strokeWidth="2"
-      />
+    <svg width={22} height={22} viewBox="0 0 24 24">
+      {filled ? (
+        <path
+          d="M6 3.5C6 2.67157 6.67157 2 7.5 2H16.5C17.3284 2 18 2.67157 18 3.5V22L12 18.5L6 22V3.5Z"
+          fill="#FF0000"
+        />
+      ) : (
+        <path
+          d="M7.5 2.75H16.5C16.9142 2.75 17.25 3.08579 17.25 3.5V20.692L12 17.639L6.75 20.692V3.5C6.75 3.08579 7.08579 2.75 7.5 2.75Z"
+          fill="none"
+          stroke="#000000"
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+      )}
     </svg>
   );
 }
 
 function StarIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="#F5B301">
-      <path d="M12 2L14.9 8.6L22 9.3L16.7 13.8L18.3 21L12 17.3L5.7 21L7.3 13.8L2 9.3L9.1 8.6L12 2Z" />
-    </svg>
-  );
-}
-
-function PinIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <svg width={18} height={18} viewBox="0 0 24 24">
       <path
-        d="M12 22s7-4.5 7-12a7 7 0 1 0-14 0c0 7.5 7 12 7 12Z"
-        stroke="#AAB2B8"
-        strokeWidth="2"
+        d="M12 2l2.92 6.62 7.08.62-5.35 4.64 1.6 6.96L12 17.77 5.75 20.84l1.6-6.96L2 9.24l7.08-.62L12 2z"
+        fill="#FBBF24"
       />
-      <circle cx="12" cy="10" r="2.5" fill="#AAB2B8" />
     </svg>
   );
 }
 
-function ClockIcon() {
+const pad2 = (n: number) => String(n).padStart(2, "0");
+
+
+function dashToDot(date: string) {
+  if (!date) return "";
+  return date.replaceAll("-", ".");
+}
+
+function formatReservationDateTime(r: ApiReservation) {
+  const d = dashToDot(r.reservationDate);
+  const hh = pad2(r.reservationTime?.hour ?? 0);
+  const mm = pad2(r.reservationTime?.minute ?? 0);
+  return d;
+}
+
+function mapApiReservationToUI(api: ApiReservation): Reservation {
+  return {
+    id: api.reservationId,
+
+    targetType: api.targetType,
+    targetId: api.targetId,
+
+    hospitalName: api.targetName ?? "-",
+    hospitalCategoryLabel:
+      api.targetType === "HOSPITAL" ? "동물병원" : "장례식장",
+
+    rating: (api as any).ratingAvg ?? 0,
+    reviewCount: (api as any).reviewCount ?? 0,
+
+    reservationNumber: api.reservationNumber ?? "-",
+    reservedDate: formatReservationDateTime(api),
+    petName: api.petName ?? "-",
+    petSpeciesSex: (api as any).petSpeciesSex ?? "-",
+
+    status: "RESERVED",
+  };
+}
+
+export default function MyPageReservation() {
+  const { isInterested, toggle } = useInterest();
+
+  const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const PAGE_SIZE = 3;
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.max(1, Math.ceil(reservations.length / PAGE_SIZE));
+
+  const pageItems = useMemo(() => {
+    const start = (page - 1) * PAGE_SIZE;
+    return reservations.slice(start, start + PAGE_SIZE);
+  }, [reservations, page]);
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const data = await fetchMyReservations();
+        const mapped = (data ?? []).map(mapApiReservationToUI);
+        setReservations(mapped);
+      } catch (e) {
+        console.error(e);
+        setReservations([]);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  const handleCancelReservation = async (id: number) => {
+    const ok = window.confirm("정말 예약을 취소하시겠습니까?");
+    if (!ok) return;
+
+    try {
+      await cancelReservation(id);
+
+      setReservations((prev) =>
+        prev.map((r) => (r.id === id ? { ...r, status: "CANCELED" } : r))
+      );
+    } catch (e) {
+      console.error(e);
+      alert("예약 취소에 실패했습니다.");
+    }
+  };
+
+  const handleToggleBookmark = async (
+    targetType: "HOSPITAL" | "FUNERAL",
+    targetId: number
+  ) => {
+    try {
+      await toggle(targetType, targetId);
+    } catch (e) {
+      console.error(e);
+      alert("즐겨찾기 처리에 실패했습니다.");
+    }
+  };
+
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="9" stroke="#AAB2B8" strokeWidth="2" />
-      <path d="M12 7v6l4 2" stroke="#AAB2B8" strokeWidth="2" strokeLinecap="round" />
-    </svg>
+    <section className="mp-main reservationBox">
+      <div className="mp-box">
+        <div className="mpr-header">
+          <h2 className="mpr-title">예약 내역 관리</h2>
+          <p className="mpr-desc">법적 진료내역 보관 기간은 최소 1년입니다.</p>
+        </div>
+        <div className="mpr-divider" />
+      </div>
+
+      {loading ? (
+        <div className="reservation-list">
+          <div className="wr-empty">불러오는 중...</div>
+        </div>
+      ) : reservations.length === 0 ? (
+        <div className="reservation-list">
+          <div className="wr-empty">예약 내역이 없습니다.</div>
+        </div>
+      ) : (
+        <div className="reservation-list">
+          {pageItems.map((r) => {
+            const filled = isInterested(r.targetType, r.targetId);
+
+            return (
+              <div className="reservation-card" key={r.id}>
+                <div className="card-image">IMAGE</div>
+
+                <div className="card-info">
+                  <div className="card-title">
+                    <div className="card-hospital-name">{r.hospitalName}</div>
+
+                    <div className="card-rating">
+                      <StarIcon />
+                      <span>{r.rating}</span>
+                      <span className="card-reviewcount">({r.reviewCount})</span>
+                    </div>
+                  </div>
+
+                  <div className="card-sub">{r.hospitalCategoryLabel}</div>
+
+                  <div className="card-line">
+                    <div className="card-row">
+                      <div className="card-label">예약번호</div>
+                      <div className="card-value">{r.reservationNumber}</div>
+                    </div>
+
+                    <div className="card-row">
+                      <div className="card-label">예약날짜</div>
+                      <div className="card-value">{r.reservedDate}</div>
+                    </div>
+
+                    <div className="card-row">
+                      <div className="card-label">반려동물</div>
+                      <div className="card-value">
+                        {r.petName} / {r.petSpeciesSex}
+                      </div>
+                    </div>
+
+                    <div className="card-row">
+                      <div className="card-label">상태</div>
+                      <div
+                        className={`card-status ${
+                          r.status === "RESERVED" ? "reserved" : "canceled"
+                        }`}
+                      >
+                        {r.status === "RESERVED" ? "예약완료" : "예약취소"}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="card-actions">
+                  <div
+                    className="bookmark"
+                    onClick={() => handleToggleBookmark(r.targetType, r.targetId)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        handleToggleBookmark(r.targetType, r.targetId);
+                      }
+                    }}
+                  >
+                    <BookmarkIcon filled={filled} />
+                  </div>
+
+                  <button
+                    className="cancel-btn"
+                    onClick={() => handleCancelReservation(r.id)}
+                    disabled={r.status === "CANCELED"}
+                  >
+                    예약취소
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {reservations.length > 0 && (
+        <div className="pagination">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              className={`page-btn ${page === i + 1 ? "active" : ""}`}
+              onClick={() => setPage(i + 1)}
+              type="button"
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

@@ -1,4 +1,3 @@
-/* 회원정보 큰 박스  */
 .mp-main {
   width: 636px;      
   background: #fff;
@@ -8,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* header */
 .mp-main-header {
   text-align: left;
 }
@@ -33,7 +31,6 @@
   margin: 14px 0 18px;
 }
 
-/* 프로필 정보 헤더 */
 .mp-profile-head {
   margin-bottom: 12px;
 }
@@ -54,14 +51,13 @@
   margin-top: 10px;
 }
 
-/* body */
 .mp-profile-content {
   display: flex;
   gap: 26px;
   align-items: flex-start;
 }
 
-/* left profile */
+
 .mp-profile-col {
   width: 160px;
   display: flex;
@@ -101,7 +97,6 @@
   object-fit: cover;
 }
 
-/* right table */
 .mp-info-col {
   flex: 1;
 }
@@ -120,7 +115,6 @@
   font-weight: 600;
 }
 
-/* 기본 input */
 .mp-input {
   border: none;
   outline: none;
@@ -178,7 +172,6 @@
   height: 0;
 }
 
-/* 성별 */
 .mp-gender {
   display: flex;
   align-items: center;
@@ -197,7 +190,6 @@
   accent-color: var(--brand);
 }
 
-/* 전화번호 */
 .mp-readonly {
   color: #64748b;
   cursor: default;
@@ -207,7 +199,6 @@
   background: transparent;
 }
 
-/* bottom */
 .mp-bottom {
   display: flex;
   align-items: center;
@@ -215,7 +206,6 @@
   margin-top: 18px;
 }
 
-/* buttons */
 .mp-outline-btn {
   height: 34px;
   padding: 0 14px;
@@ -239,7 +229,6 @@
   cursor: pointer;
 }
 
-/*  Modal  */
 .mp-modal-overlay {
   position: fixed;
   inset: 0;

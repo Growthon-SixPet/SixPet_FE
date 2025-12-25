@@ -1,65 +1,70 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyReviewHistory.css";
+
+import {
+  fetchMyReviews,
+  deleteMyReview,
+  mapReviewToUI,
+  type MyReviewApi,
+} from "../api/reviews";
 
 type Review = {
   id: number;
   writerName: string;
-  petType: string;
   rating: number;
   date: string;
-  hospitalName: string; // ✅ 추가
+  hospitalName: string;
   content: string;
 };
-
 
 const PAGE_SIZE = 3;
 
 export default function MyReviewHistory() {
   const navigate = useNavigate();
 
-  const [reviews, setReviews] = useState<Review[]>([
-    {
-      id: 1,
-      writerName: "김연지",
-      petType: "강아지",
-      rating: 5,
-      date: "2025.11.20",
-      hospitalName: "더미 데이터 동물병원",
-      content:
-        "우리 강아지가 아팠을 때 정말 친절하게 치료해주셨어요. 24시간 응급실도 있어서 안심이 됩니다. 수술 후 관리도 꼼꼼하게 해주셔서 감사했습니다.",
-    },
-    {
-      id: 2,
-      writerName: "김연지",
-      petType: "강아지",
-      rating: 5,
-      date: "2025.11.20",
-      hospitalName: "더미 데이터 동물병원2",
-      content:
-        "우리 강아지가 아팠을 때 정말 친절하게 치료해주셨어요. 24시간 응급실도 있어서 안심이 됩니다. 수술 후 관리도 꼼꼼하게 해주셔서 감사했습니다.",
-    },
-    {
-      id: 3,
-      writerName: "김연지",
-      petType: "강아지",
-      rating: 5,
-      date: "2025.11.20",
-      hospitalName: "더미 데이터 동물병원3",
-      content: "우리 강아지가 아팠을 때 정말 친절하게 치료해주셔서 감사했습니다.",
-    },
-    {
-      id: 4,
-      writerName: "김연지",
-      petType: "강아지",
-      rating: 4,
-      date: "2025.11.18",
-      hospitalName: "더미 데이터 동물병원4",
-      content: "설명이 자세해서 믿음이 갔습니다.",
-    },
-  ]);
-
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [page, setPage] = useState(1);
+
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+
+    (async () => {
+      setLoading(true);
+      setErrorMsg(null);
+
+      try {
+        const list: MyReviewApi[] = await fetchMyReviews();
+
+        if (!alive) return;
+
+        const uiList: Review[] = list.map((r) => ({
+          ...mapReviewToUI(r)
+        }));
+
+        setReviews(uiList);
+        setPage(1);
+      } catch (e: any) {
+        if (!alive) return;
+        const status = e?.response?.status;
+        const msg =
+          e?.response?.data?.message ||
+          e?.message ||
+          "후기 목록 조회에 실패했습니다.";
+        setErrorMsg(status ? `${msg} (status: ${status})` : msg);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   const totalPages = Math.max(1, Math.ceil(reviews.length / PAGE_SIZE));
 
   const pageReviews = useMemo(() => {
@@ -67,36 +72,52 @@ export default function MyReviewHistory() {
     return reviews.slice(start, start + PAGE_SIZE);
   }, [reviews, page]);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     const ok = window.confirm("후기를 삭제하시겠습니까?");
     if (!ok) return;
 
-    setReviews((prev) => prev.filter((r) => r.id !== id));
+    try {
+      await deleteMyReview(id);
 
-    setTimeout(() => {
-      const newTotal = Math.max(1, Math.ceil((reviews.length - 1) / PAGE_SIZE));
-      setPage((p) => Math.min(p, newTotal));
-    }, 0);
+      setReviews((prev) => prev.filter((r) => r.id !== id));
+
+      setTimeout(() => {
+        setPage((p) => {
+          const newTotal = Math.max(1, Math.ceil((reviews.length - 1) / PAGE_SIZE));
+          return Math.min(p, newTotal);
+        });
+      }, 0);
+    } catch (e: any) {
+      const status = e?.response?.status;
+      const msg =
+        e?.response?.data?.message || e?.message || "후기 삭제에 실패했습니다.";
+      alert(status ? `${msg} (status: ${status})` : msg);
+    }
   };
 
   return (
     <section className="wr-content">
       <div className="wr-box">
-      <header className="wr-content-head">
-        <h1 className="wr-title">후기 내역 관리</h1>
-        <p className="wr-subtitle">고객님께서 입력하신 후기 내역 정보입니다.</p>
-      </header>
+        <header className="wr-content-head">
+          <h1 className="wr-title">후기 내역 관리</h1>
+          <p className="wr-subtitle">
+            고객님께서 입력하신 후기 내역 정보입니다.
+          </p>
+        </header>
       </div>
+
+      {loading && <div className="wr-empty">불러오는 중...</div>}
+      {!loading && errorMsg && <div className="wr-empty">{errorMsg}</div>}
+
       <div className="wr-list">
-        {pageReviews.length === 0 ? (
+        {!loading && !errorMsg && pageReviews.length === 0 ? (
           <div className="wr-empty">작성한 후기가 없습니다.</div>
         ) : (
+          !loading &&
+          !errorMsg &&
           pageReviews.map((review) => (
             <article key={review.id} className="wr-card">
-              <button
-                className="wr-delete"
-                onClick={() => handleDelete(review.id)}
-              >
+              <button className="wr-delete" onClick={() => handleDelete(review.id)}>
                 삭제
               </button>
 
@@ -118,13 +139,14 @@ export default function MyReviewHistory() {
                 <span className="wr-date">{review.date}</span>
                 <span className="wr-hospital">{review.hospitalName}</span>
               </div>
+
               <p className="wr-text">{review.content}</p>
             </article>
           ))
         )}
       </div>
 
-      {reviews.length > 0 && (
+      {!loading && !errorMsg && reviews.length > 0 && (
         <div className="wr-pagination">
           <button
             className="wr-page-btn"
