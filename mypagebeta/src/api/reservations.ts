@@ -17,12 +17,13 @@ export type ApiReservation = {
   targetId: number;
   targetName: string;
   petName: string;
-  reservationDate: string; 
+  reservationDate: string;
   reservationTime: {
     hour: number;
     minute: number;
   };
   visitReason: string;
+  status: "RESERVED" | "CANCELED";
 };
 
 export async function fetchMyReservations(): Promise<ApiReservation[]> {

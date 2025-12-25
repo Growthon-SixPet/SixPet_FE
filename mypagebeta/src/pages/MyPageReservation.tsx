@@ -86,7 +86,7 @@ function mapApiReservationToUI(api: ApiReservation): Reservation {
     petName: api.petName ?? "-",
     petSpeciesSex: (api as any).petSpeciesSex ?? "-",
 
-    status: "RESERVED",
+    status: api.status,
   };
 }
 
@@ -220,7 +220,7 @@ export default function MyPageReservation() {
                     className="bookmarkInlineBtn"
                     onClick={() => handleToggleBookmark(r)}
                     aria-label={active ? "즐겨찾기 해제" : "즐겨찾기 추가"}
-          q         title={active ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+                    title={active ? "즐겨찾기 해제" : "즐겨찾기 추가"}
                   >
                    <BookmarkIcon active={active} />
                   </button>

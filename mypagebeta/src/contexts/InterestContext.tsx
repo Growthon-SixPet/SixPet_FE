@@ -72,22 +72,46 @@ export function InterestProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggle = useCallback(
-    async (targetType: TargetType, targetId: number) => {
-      const key = `${targetType}:${targetId}`;
-      const existed = mapByKey.get(key);
+  async (targetType: TargetType, targetId: number) => {
+    const key = `${targetType}:${targetId}`;
+    const existed = mapByKey.get(key);
 
-      if (existed) {
-        await deleteInterest(existed.interestId);
-        setList((prev) => prev.filter((x) => x.interestId !== existed.interestId));
-        return;
-      }
+    if (existed) {
+      await deleteInterest(existed.interestId);
+      setList((prev) => prev.filter((x) => x.interestId !== existed.interestId));
+      return;
+    }
 
+    const tempId = -Date.now();
+
+    setList((prev) => [
+      ...prev,
+      {
+        interestId: tempId,
+        targetType,
+        targetId,
+        targetName: "",
+        address: "",
+        ratingAvg: 0,
+        reviewCount: 0,
+        openNow: false,
+        open24h: false,
+        nightCare: false,
+        mainImageUrl: "",
+      } as ApiInterest,
+    ]);
+
+    try {
       await createInterest({ targetType, targetId });
-
       await refresh();
-    },
-    [mapByKey, refresh]
-  );
+    } catch (e) {
+      setList((prev) => prev.filter((x) => x.interestId !== tempId));
+      throw e;
+    }
+  },
+  [mapByKey, refresh]
+);
+
 
   const value = useMemo<InterestContextValue>(
     () => ({
