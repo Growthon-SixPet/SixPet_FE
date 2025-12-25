@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  background-color: #f2f2f2;
+}
+
+/* 전체 화면 */
+.page-wrapper {
+  min-width: 1280px;
+  min-height: 1752px;
+}
+
+/* 좌우 마진 240 */
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+/* 스크롤 */
+.scroll-area {
+  max-height: calc(1752px - 80px);
+  overflow-y: auto;
+}
