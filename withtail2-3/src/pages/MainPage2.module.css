@@ -21,7 +21,6 @@
   background: #f7f7f7;
 }
 
-/* ✅ 검색바 기준선을 mainGrid와 동일하게 */
 .searchWrap {
   padding: 18px 0 10px;
   width: 1000px;
@@ -72,7 +71,6 @@
   cursor: pointer;
 }
 
-/* ✅ 메인 2컬럼 */
 .mainGrid {
   width: 1000px;
   margin: 0 auto;
@@ -82,7 +80,6 @@
   padding: 12px 0 28px;
 }
 
-/* ✅ 필터 */
 .filterCard {
   background: #fff;
   border-radius: 12px;
@@ -138,7 +135,6 @@
   margin-top: 8px;
 }
 
-/* ✅ 리스트 */
 .listArea {
   min-height: 500px;
 }
@@ -290,7 +286,6 @@
   cursor: pointer;
 }
 
-/* ✅ 페이지네이션 */
 .pagination {
   margin-top: 18px;
   display: flex;
@@ -324,7 +319,6 @@
   color: var(--brand);
 }
 
-/* ✅ 지역 드롭다운(스르륵) */
 .regionTrigger {
   width: 100%;
   border: none;

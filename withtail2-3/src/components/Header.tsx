@@ -3,7 +3,7 @@ export default function Header() {
     <header
       style={{
         height: "64px",
-        background: "#2EAADC", /* 상단 바 색 */
+        background: "#2EAADC", 
         color: "#fff",
         display: "flex",
         alignItems: "center",

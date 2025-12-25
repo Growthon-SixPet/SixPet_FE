@@ -12,7 +12,6 @@ body,
   background: #ffffff;
 }
 
-/* 기본 요소 폰트 통일 */
 button,
 input,
 select,
@@ -20,7 +19,6 @@ textarea {
   font-family: inherit;
 }
 
-/* 기본 box sizing */
 *,
 *::before,
 *::after {

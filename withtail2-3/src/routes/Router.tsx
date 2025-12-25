@@ -6,7 +6,6 @@ export default function Router() {
     <Routes>
       <Route path="/" element={<MainPage2 />} />
 
-      {/* 병원 상세 페이지 (다른 팀원이 만들 예정) */}
       <Route path="/hospital/:id" element={<div>병원 상세 페이지</div>} />
     </Routes>
   );
