@@ -8,7 +8,6 @@ type ApiEnvelope<T> = {
   success: boolean;
 };
 
-/* ===== 서버 예약 타입 ===== */
 export type ApiReservation = {
   reservationId: number;
   reservationNumber: string;

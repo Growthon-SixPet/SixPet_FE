@@ -128,12 +128,35 @@
   justify-content: space-between;
 }
 
-.bookmark {
+.bookmarkInlineBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  display: grid;
+  place-items: center;
   cursor: pointer;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 0 0 auto;
+  margin-top: -2px; 
+}
+
+.bookmarkInlineBtn:hover,
+.bookmarkInlineBtn:active,
+.bookmarkInlineBtn:focus,
+.bookmarkInlineBtn:focus-visible {
+  background: transparent;
+  outline: none;
+}
+
+.bookmarkInlineBtn svg {
+  display: block;
+}
+
+.bookmarkInlineBtn svg path {
+  fill: none;
+  stroke: #FF0000;
+  stroke-width: 1.5;
 }
 
 .cancel-btn {

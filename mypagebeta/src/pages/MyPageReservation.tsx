@@ -11,7 +11,6 @@ import { useInterest } from "../contexts/InterestContext";
 
 type ReservationStatus = "RESERVED" | "CANCELED";
 
-
 type Reservation = {
   id: number;
 
@@ -31,25 +30,27 @@ type Reservation = {
   status: ReservationStatus;
 };
 
-function BookmarkIcon({ filled }: { filled: boolean }) {
+function BookmarkIcon({ active }: { active: boolean }) {
   return (
-    <svg width={22} height={22} viewBox="0 0 24 24">
-      {filled ? (
-        <path
-          d="M6 3.5C6 2.67157 6.67157 2 7.5 2H16.5C17.3284 2 18 2.67157 18 3.5V22L12 18.5L6 22V3.5Z"
-          fill="#FF0000"
-        />
-      ) : (
-        <path
-          d="M7.5 2.75H16.5C16.9142 2.75 17.25 3.08579 17.25 3.5V20.692L12 17.639L6.75 20.692V3.5C6.75 3.08579 7.08579 2.75 7.5 2.75Z"
-          fill="none"
-          stroke="#000000"
-          strokeWidth="1.8"
-        />
-      )}
+    <svg
+      width={18}
+      height={18}
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        d="M6 3.5C6 2.67157 6.67157 2 7.5 2H16.5C17.3284 2 18 2.67157 18 3.5V22L12 18.5L6 22V3.5Z"
+        fill="transparent"
+        stroke={active ? "#FF0000" : "#000000"}
+        strokeWidth={2.8}              
+        vectorEffect="non-scaling-stroke"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
+
+
 
 function StarIcon() {
   return (
@@ -74,8 +75,7 @@ function mapApiReservationToUI(api: ApiReservation): Reservation {
     targetId: api.targetId,
 
     hospitalName: api.targetName ?? "-",
-    hospitalCategoryLabel:
-      api.targetType === "HOSPITAL" ? "동물병원" : "장례식장",
+    hospitalCategoryLabel: api.targetType === "HOSPITAL" ? "동물병원" : "장례식장",
 
     rating: (api as any).ratingAvg ?? 0,
     reviewCount: (api as any).reviewCount ?? 0,
@@ -99,10 +99,7 @@ export default function MyPageReservation() {
   const PAGE_SIZE = 3;
   const [page, setPage] = useState(1);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(reservations.length / PAGE_SIZE)
-  );
+  const totalPages = Math.max(1, Math.ceil(reservations.length / PAGE_SIZE));
 
   const pageItems = useMemo(() => {
     const start = (page - 1) * PAGE_SIZE;
@@ -134,11 +131,7 @@ export default function MyPageReservation() {
 
     try {
       await cancelReservation(id);
-      setReservations((prev) =>
-        prev.map((r) =>
-          r.id === id ? { ...r, status: "CANCELED" } : r
-        )
-      );
+      setReservations((prev) => prev.map((r) => (r.id === id ? { ...r, status: "CANCELED" } : r)));
     } catch (e) {
       console.error(e);
       alert("예약 취소에 실패했습니다.");
@@ -159,9 +152,7 @@ export default function MyPageReservation() {
       <div className="mp-box">
         <div className="mpr-header">
           <h2 className="mpr-title">예약 내역 관리</h2>
-          <p className="mpr-desc">
-            법적 진료내역 보관 기간은 최소 1년입니다.
-          </p>
+          <p className="mpr-desc">법적 진료내역 보관 기간은 최소 1년입니다.</p>
         </div>
         <div className="mpr-divider" />
       </div>
@@ -176,93 +167,75 @@ export default function MyPageReservation() {
         </div>
       ) : (
         <div className="reservation-list">
-          {pageItems.map((r) => (
-            <div className="reservation-card" key={r.id}>
-              <div className="card-image">IMAGE</div>
+          {pageItems.map((r) => {
+            const active = isInterested(r.targetType, r.targetId);
 
-              <div className="card-info">
-                <div className="card-title">
-                  <div className="card-hospital-name">
-                    {r.hospitalName}
+            return (
+              <div className="reservation-card" key={r.id}>
+                <div className="card-image">IMAGE</div>
+
+                <div className="card-info">
+                  <div className="card-title">
+                    <div className="card-hospital-name">{r.hospitalName}</div>
+
+                    <div className="card-rating">
+                      <StarIcon />
+                      <span>{r.rating}</span>
+                      <span className="card-reviewcount">({r.reviewCount})</span>
+                    </div>
                   </div>
 
-                  <div className="card-rating">
-                    <StarIcon />
-                    <span>{r.rating}</span>
-                    <span className="card-reviewcount">
-                      ({r.reviewCount})
-                    </span>
+                  <div className="card-sub">{r.hospitalCategoryLabel}</div>
+
+                  <div className="card-line">
+                    <div className="card-row">
+                      <div className="card-label">예약번호</div>
+                      <div className="card-value">{r.reservationNumber}</div>
+                    </div>
+
+                    <div className="card-row">
+                      <div className="card-label">예약날짜</div>
+                      <div className="card-value">{r.reservedDate}</div>
+                    </div>
+
+                    <div className="card-row">
+                      <div className="card-label">반려동물</div>
+                      <div className="card-value">
+                        {r.petName} / {r.petSpeciesSex}
+                      </div>
+                    </div>
+
+                    <div className="card-row">
+                      <div className="card-label">상태</div>
+                      <div className={`card-status ${r.status === "RESERVED" ? "reserved" : "canceled"}`}>
+                        {r.status === "RESERVED" ? "예약완료" : "예약취소"}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="card-sub">
-                  {r.hospitalCategoryLabel}
-                </div>
+                <div className="card-actions">
+                  <button
+                    type="button"
+                    className="bookmarkInlineBtn"
+                    onClick={() => handleToggleBookmark(r)}
+                    aria-label={active ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+          q         title={active ? "즐겨찾기 해제" : "즐겨찾기 추가"}
+                  >
+                   <BookmarkIcon active={active} />
+                  </button>
 
-                <div className="card-line">
-                  <div className="card-row">
-                    <div className="card-label">예약번호</div>
-                    <div className="card-value">
-                      {r.reservationNumber}
-                    </div>
-                  </div>
-
-                  <div className="card-row">
-                    <div className="card-label">예약날짜</div>
-                    <div className="card-value">
-                      {r.reservedDate}
-                    </div>
-                  </div>
-
-                  <div className="card-row">
-                    <div className="card-label">반려동물</div>
-                    <div className="card-value">
-                      {r.petName} / {r.petSpeciesSex}
-                    </div>
-                  </div>
-
-                  <div className="card-row">
-                    <div className="card-label">상태</div>
-                    <div
-                      className={`card-status ${
-                        r.status === "RESERVED"
-                          ? "reserved"
-                          : "canceled"
-                      }`}
-                    >
-                      {r.status === "RESERVED"
-                        ? "예약완료"
-                        : "예약취소"}
-                    </div>
-                  </div>
+                  <button
+                    className="cancel-btn"
+                    onClick={() => handleCancelReservation(r.id)}
+                    disabled={r.status === "CANCELED"}
+                  >
+                    예약취소
+                  </button>
                 </div>
               </div>
-
-              <div className="card-actions">
-                <div
-                  className="bookmark"
-                  onClick={() => handleToggleBookmark(r)}
-                >
-                  <BookmarkIcon
-                    filled={isInterested(
-                      r.targetType,
-                      r.targetId
-                    )}
-                  />
-                </div>
-
-                <button
-                  className="cancel-btn"
-                  onClick={() =>
-                    handleCancelReservation(r.id)
-                  }
-                  disabled={r.status === "CANCELED"}
-                >
-                  예약취소
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
@@ -271,9 +244,7 @@ export default function MyPageReservation() {
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i}
-              className={`page-btn ${
-                page === i + 1 ? "active" : ""
-              }`}
+              className={`page-btn ${page === i + 1 ? "active" : ""}`}
               onClick={() => setPage(i + 1)}
               type="button"
             >
