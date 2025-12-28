@@ -13,7 +13,7 @@ import {
 } from "../../api/reviews";
 
 import ReservationModal from "./components/ReservationModal";
-import "./HospitalDetail.module.css";
+import styles from "./HospitalDetail.module.css";
 
 /* ================= 타입 ================= */
 
@@ -110,32 +110,32 @@ export default function HospitalDetail() {
 
   return (
     <>
-      <div className="page-wrapper">
-        <div className="page">
+      <div className={styles.pageWrapper}>
+        <div className={styles.page}>
           {/* 상단 병원 정보 */}
-          <div className="top-card">
-            <div className="image-box">
+          <div className={styles.topCard}>
+            <div className={styles.imageBox}>
               {hospital.mainImageUrl ? (
                 <img src={hospital.mainImageUrl} />
               ) : (
-                <div className="image-placeholder">이미지 없음</div>
+                <div className={styles.imagePlaceholder}>이미지 없음</div>
               )}
             </div>
 
-            <div className="info-box">
-              <div className="title-row">
+            <div className={styles.infoBox}>
+              <div className={styles.titleRow}>
                 <h2>{hospital.name}</h2>
-                <span className="rating">
+                <span className={styles.rating}>
                   ⭐ {hospital.ratingAvg} ({hospital.reviewCount})
                 </span>
               </div>
 
-              <p className="desc">{hospital.description}</p>
-              <p className="sub">📍 {hospital.address}</p>
-              <p className="sub">📞 {hospital.phone}</p>
+              <p className={styles.desc}>{hospital.description}</p>
+              <p className={styles.sub}>📍 {hospital.address}</p>
+              <p className={styles.sub}>📞 {hospital.phone}</p>
 
               <button
-                className="reserve-btn"
+                className={styles.reserveBtn}
                 onClick={() => setOpenReservation(true)}
               >
                 예약하기
@@ -146,9 +146,9 @@ export default function HospitalDetail() {
           {/* 진료 시간 */}
           <section>
             <h3>진료 시간</h3>
-            <div className="hours-row">
+            <div className={styles.hoursRow}>
               {hours.map((h, i) => (
-                <div key={i} className="hour-card">
+                <div key={i} className={styles.hourCard}>
                   <strong>{h.day}</strong>
                   <div>
                     {h.openTime} ~ {h.closeTime}
@@ -159,21 +159,29 @@ export default function HospitalDetail() {
           </section>
 
           {/* 탭 */}
-          <div className="tab-row">
+          <div className={styles.tabRow}>
             <button
-              className={tab === "news" ? "tab active" : "tab"}
+              className={`${styles.tab} ${
+                tab === "news" ? styles.active : ""
+              }`}
               onClick={() => setTab("news")}
             >
               병원소식
             </button>
+
             <button
-              className={tab === "doctors" ? "tab active" : "tab"}
+              className={`${styles.tab} ${
+                tab === "doctors" ? styles.active : ""
+              }`}
               onClick={() => setTab("doctors")}
             >
               의료진
             </button>
+
             <button
-              className={tab === "reviews" ? "tab active" : "tab"}
+              className={`${styles.tab} ${
+                tab === "reviews" ? styles.active : ""
+              }`}
               onClick={() => {
                 setTab("reviews");
                 loadReviews();
@@ -187,7 +195,7 @@ export default function HospitalDetail() {
           <section>
             {tab === "news" &&
               news.map((n) => (
-                <div key={n.newsId} className="news-card">
+                <div key={n.newsId} className={styles.newsCard}>
                   <h4>{n.title}</h4>
                   <p>{n.content}</p>
                   <small>{n.createdAt}</small>
@@ -199,7 +207,7 @@ export default function HospitalDetail() {
             {tab === "reviews" && (
               <>
                 {/* 리뷰 작성 */}
-                <div className="review-card">
+                <div className={styles.reviewCard}>
                   {[1, 2, 3, 4, 5].map((n) => (
                     <span
                       key={n}
@@ -232,7 +240,7 @@ export default function HospitalDetail() {
                 </div>
 
                 {reviews.map((r) => (
-                  <div key={r.reviewId} className="review-card">
+                  <div key={r.reviewId} className={styles.reviewCard}>
                     <strong>{r.writerNickname}</strong>
                     <span>⭐ {r.rating}</span>
                     <p>{r.content}</p>

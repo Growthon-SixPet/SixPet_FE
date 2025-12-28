@@ -10,12 +10,15 @@
   padding: 32px 0 80px;
 }
 
+/* ================= 상단 병원 카드 ================= */
+
 .top-card {
   display: flex;
   gap: 32px;
-  background: #fff;
+  background: #ffffff;
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
 }
 
 .image-box {
@@ -23,7 +26,7 @@
   height: 260px;
   border-radius: 16px;
   overflow: hidden;
-  background: #ddd;
+  background: #e5e7eb;
 }
 
 .image-box img {
@@ -36,11 +39,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  color: #9ca3af;
+  font-size: 14px;
 }
 
 .info-box {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .title-row {
@@ -49,63 +55,137 @@
   align-items: center;
 }
 
+.title-row h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+
 .rating {
   color: #f5b301;
   font-weight: 600;
+  font-size: 15px;
 }
 
 .desc {
-  margin: 12px 0;
-  color: #555;
+  margin: 14px 0;
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 14px;
 }
 
 .sub {
-  color: #777;
-  margin-top: 4px;
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 6px;
 }
 
-.reserve-btn {
-  margin-top: 24px;
-  height: 48px;
-  width: 220px;
+/* ================= 예약 버튼 ================= */
+
+.reserveBtn {
+  margin-top: auto;
+  width: 100%;
+  height: 52px;
   background: #5ba9d6;
-  color: #fff;
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
+  border-radius: 14px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.hours-row {
-  display: flex;
-  gap: 8px;
-  margin-top: 16px;
+.reserveBtn:hover {
+  background: #4a98c6;
 }
 
-.hour-card {
-  flex: 1;
-  background: #f1f4f7;
-  border-radius: 12px;
-  padding: 12px;
-  text-align: center;
-  font-size: 13px;
+/* ================= 진료 시간 ================= */
+
+section {
+  margin-top: 48px;
 }
+
+section h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.hours-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+/* 요일 카드 */
+.hour-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 14px 10px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  font-size: 12px;
+}
+
+/* 요일 */
+.hour-card strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* 진료 시간 */
+.hour-card div {
+  font-size: 12px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+/* 접수마감 강조 */
+.hour-card div:last-child {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* ================= 점심시간 안내 ================= */
+
+.hours-row::after {
+  content: "※ 점심시간 11:30 ~ 12:00";
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* ================= 탭 ================= */
 
 .tab-row {
   display: flex;
   justify-content: center;
-  gap: 32px;
-  margin-top: 48px;
+  gap: 40px;
+  margin-top: 56px;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .tab {
-  padding-bottom: 12px;
+  padding-bottom: 14px;
   background: none;
   border: none;
   cursor: pointer;
-  color: #666;
   font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.tab:hover {
+  color: #5ba9d6;
 }
 
 .tab.active {
@@ -114,30 +194,41 @@
   border-bottom: 3px solid #5ba9d6;
 }
 
+/* ================= 병원 소식 ================= */
+
 .news-card {
-  display: flex;
-  gap: 20px;
-  background: #fff;
+  background: #ffffff;
   padding: 20px;
-  border-radius: 14px;
+  border-radius: 16px;
   margin-bottom: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
-.news-thumb {
-  width: 120px;
-  height: 80px;
-  background: #ddd;
-  border-radius: 10px;
+.news-card h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
 }
+
+.news-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.news-card small {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* ================= 리뷰 ================= */
 
 .review-card {
-  background: #fff;
-  padding: 16px;
-  border-radius: 12px;
+  background: #ffffff;
+  padding: 18px;
+  border-radius: 16px;
   margin-bottom: 16px;
-}
-
-.review-top {
-  display: flex;
-  justify-content: space-between;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }

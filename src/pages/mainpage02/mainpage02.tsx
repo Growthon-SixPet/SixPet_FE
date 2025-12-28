@@ -500,30 +500,30 @@ export default function MainPage2() {
                     </div>
 
                     <div className={styles.cardRight}>
-                      <button
-                        onClick={async (e) => {
-                          e.stopPropagation();
+                    <button
+  onClick={async (e) => {
+    e.stopPropagation();
 
-                          if (!isLoggedIn || !getToken()) {
-                            alert("로그인이 필요한 서비스입니다.");
-                            return;
-                          }
+    if (!isLoggedIn) {
+      alert("로그인이 필요한 서비스입니다.");
+      return;
+    }
 
-                          try {
-                            await toggle("HOSPITAL", h.id);
-                          } catch (err: any) {
-                            if (err?.message === "LOGIN_REQUIRED") {
-                              alert("로그인이 필요한 서비스입니다.");
-                              return;
-                            }
-                            alert("즐겨찾기 처리에 실패했습니다.");
-                          }
-                        }}
-                        className={styles.bookmarkBtn}
-                        aria-label="bookmark"
-                      >
-                        <BookmarkIcon active={isInterested("HOSPITAL", h.id)} />
-                      </button>
+    try {
+      await toggle("HOSPITAL", h.id);
+    } catch (err: any) {
+      if (err?.message === "LOGIN_REQUIRED") {
+        alert("로그인이 필요한 서비스입니다.");
+        return;
+      }
+      alert("즐겨찾기 처리에 실패했습니다.");
+    }
+  }}
+  className={styles.bookmarkBtn}
+  aria-label="bookmark"
+>
+  <BookmarkIcon active={isInterested("HOSPITAL", h.id)} />
+</button>
 
                       <button
                         className={styles.detailBtn}
